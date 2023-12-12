@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/cmsStyle.css">
+    <title>Content Manager</title>
+</head>
+<body>
+    <header class="header">
+        <iframe src="/banner.html" width="100%" height="100px" frameborder="0"></iframe>
+            <a href="/logOut"><button>Log Out</button></a>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+        </aside>
+        <section class="main-content">
+            <div class="live-video">
+                <% if (typeof videoPath !== 'undefined') { %>
+                    <video id="liveVideo" controls autoplay>
+                        <source src="<%= videoPath %>" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                <% } else { %>
+                    <p>Select a video to play.</p>
+                <% } %>
+            </div>
+            <div class="video-controls">
+                <a href="/uploadPage"><button>Upload</button></a>
+                <a href="/videoList"><button>Show Videos</button></a>
+                <a href="/dayUpdate"><button>Update Schedule</button></a>
+            </div>
+            <div class="historyheader">
+                <h1>Video History</h1>
+            </div>
+            <div class="schedule">
+                <div class ="history">
+                </div>
+            </div>
+        </section>
+    </div>
+    <iframe src="/footer.html" width="100%" height="300px" frameborder="0"></iframe>
+</body>
+</html>
+<script>
+    function fetchVideoHistory() {
+        fetch('/videoHistoryList')
+            .then(response => response.json())
+            .then(videoHistory => {
+                console.log('Video History:', videoHistory); // Debug: Log out the fetched video history
+                const historyElement = document.querySelector('.history');
+                historyElement.innerHTML = ''; // Clear current history
+                videoHistory.forEach(entry => {
+                    console.log('Entry:', entry); // Debug: Log out each entry
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${entry.name} - ${entry.timestamp}`;
+                    historyElement.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching video history:', error);
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchVideoHistory);
+</script>

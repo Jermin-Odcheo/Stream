@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Video List</title>
+</head>
+<body>
+    <div id = "mainContent">
+        <div id="videoPanel">
+            <div class="videoInfoCon">
+                <p>Title</p>
+                <p>Author</p>
+                <div id="titleFill"></div>
+                <div id="titleFill"></div>
+            </div>
+
+            <% if(results.length){ %>
+                <% results.forEach(result => { %>
+                    <div class="videoInfoCon">
+                        <p>
+                            <!-- Link to the video player page with contentid -->
+                            <a href="/contentManager?contentid=<%= result.contentid %>"><%= result.title %></a>
+                        </p>
+                        <p><%= result.username %></p>
+                        <form method="POST" action="/deleteVideo/<%= result.contentid%>">
+                            <button type="submit"><img src="/Trash.png"></button>
+                        </form>
+                    </div>
+                <%})%>
+            <%}%>
+        </div>
+    </div>
+</body>
+</html>

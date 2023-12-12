@@ -1,0 +1,72 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.schedule {
+    width: 100%;
+}
+.schedule a {
+    text-decoration: none;
+    color: inherit; 
+}
+.dayBar {
+    background-color: #ffffff;
+    color: #3188e5;
+    padding: 20px;
+    margin: 2px 0;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    display: block;
+}
+
+.dayBar:hover {
+    background-color: #248ce1;
+    color: #ffffff;
+}
+
+h1 {
+    position: absolute;
+    color: #ffffff;
+    background-color: #000080; /* Navy blue to match the right half of the image */
+    width: 100%;
+    margin-top: -700px;
+    margin-left: -740px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    
+}
+
+.backButton:hover {
+    background-color: #0000ff; /* Lighter blue for hover effect */
+}
+/* Responsive design */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+
+    h1 {
+        width: 50%;
+        margin-right: -50%; /* Aligns the title to the left half */
+    }
+}
+
+/* Further responsiveness for larger screens */
+@media (min-width: 1024px) {
+    .dayBar {
+        padding: 30px;
+        font-size: 1.5em;
+    }
+}
+
